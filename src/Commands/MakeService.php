@@ -18,7 +18,7 @@ class MakeService extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Cette commande crée automatiquement un service Laravel dans le dossier app\Services';
 
     /**
      * Execute the console command.
@@ -26,26 +26,36 @@ class MakeService extends Command
     public function handle()
     {
         $filename = $this->argument('filename');
+
+        // Séparez le nom de classe et le chemin du namespace s'ils sont fournis dans le format "Namespace/NomDeClasse"
+        $segments = explode('/', $filename);
+        $className = end($segments);
+        $namespace = count($segments) > 1 ? implode('\\', array_slice($segments, 0, -1)) : 'App\Services';
+
         $classContent = <<<'PHP'
-        <?php
+            <?php
 
-        class {{ClassName}}
-        {
-            public function __construct()
+            namespace {{Namespace}};
+
+            class {{ClassName}}
             {
-                // Constructeur de la classe
+                public function __construct()
+                {
+                    // Constructeur de la classe
+                }
+
+                public function maMethode()
+                {
+                    // Méthode de la classe
+                }
             }
+            PHP;
 
-            public function maMethode()
-            {
-                // Méthode de la classe
-            }
-        }
-        PHP;
+        $classContent = str_replace('{{Namespace}}', $namespace, $classContent);
+        $classContent = str_replace('{{ClassName}}', $className, $classContent);
 
-        $classContent = str_replace('{{ClassName}}', $filename, $classContent);
-
-        $filePath = app_path('Services') . DIRECTORY_SEPARATOR . $filename . '.php';
+        // Générez le chemin complet du fichier en utilisant le namespace et le nom de classe
+        $filePath = app_path('Services') . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR . $className . '.php';
 
         if (file_put_contents($filePath, $classContent)) {
             $this->info("Le fichier $filePath a été créé avec succès.");
