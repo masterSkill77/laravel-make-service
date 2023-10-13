@@ -25,7 +25,7 @@ class MakeService extends Command
      */
     public function handle()
     {
-        $filename = $this->argument('filename');
+        $filename = $this->argument('name');
 
         // Séparez le nom de classe et le chemin du namespace s'ils sont fournis dans le format "Namespace/NomDeClasse"
         $segments = explode('/', $filename);
