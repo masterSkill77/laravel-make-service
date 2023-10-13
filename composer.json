@@ -1,0 +1,28 @@
+{
+	"name": "masterskill/service-package",
+	"description": "C'est un package qui permet d'automatiquement créer des services dans Laravel",
+	"type": "library",
+	"require": {
+		"laravel/laravel": "^9"
+	},
+	"autoload": {
+		"psr-4": {
+			"Masterskill\\ServicePackage\\": "src/"
+		}
+	},
+	"authors": [
+		{
+			"name": "Clairmont RAJAONARISON",
+			"email": "clairmont.rajaonarison@gmail.com"
+		}
+	],
+	"license": "GPL-2.0-or-later",
+	"minimum-stability": "alpha",
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Masterskill\\ServicePackage\\MakeServiceProvider"
+			]
+		}
+	}
+}
