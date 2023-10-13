@@ -39,6 +39,9 @@ class MakeService extends Command
         if (!is_dir($directoryPath)) {
             mkdir($directoryPath, 0755, true);
         }
+        if (!str_starts_with($namespace, 'App\Services')) {
+            $namespace = 'App\Services\\' . $namespace;
+        }
 
         // Générez le chemin complet du fichier en utilisant le namespace et le nom de classe
         $filePath = $directoryPath . DIRECTORY_SEPARATOR . $className . '.php';
