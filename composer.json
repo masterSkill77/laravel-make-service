@@ -3,7 +3,7 @@
 	"description": "C'est un package qui permet d'automatiquement créer des services dans Laravel",
 	"type": "library",
 	"require": {
-		"laravel/laravel": "^9.*",
+		"laravel/laravel": ">=9.0",
 		"php": ">=8.0"
 	},
 	"autoload": {
