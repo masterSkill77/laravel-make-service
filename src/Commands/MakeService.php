@@ -32,6 +32,16 @@ class MakeService extends Command
         $className = end($segments);
         $namespace = count($segments) > 1 ? implode('\\', array_slice($segments, 0, -1)) : 'App\Services';
 
+        $directoryPath = app_path('Services') . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $namespace);
+
+        // Créez le répertoire si nécessaire
+        if (!is_dir($directoryPath)) {
+            mkdir($directoryPath, 0755, true);
+        }
+
+        // Générez le chemin complet du fichier en utilisant le namespace et le nom de classe
+        $filePath = $directoryPath . DIRECTORY_SEPARATOR . $className . '.php';
+
         $classContent = <<<'PHP'
             <?php
 
@@ -55,7 +65,9 @@ class MakeService extends Command
         $classContent = str_replace('{{ClassName}}', $className, $classContent);
 
         // Générez le chemin complet du fichier en utilisant le namespace et le nom de classe
-        $filePath = app_path('Services') . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR . $className . '.php';
+        // Générez le chemin complet du fichier en utilisant le namespace et le nom de classe
+        $filePath = $directoryPath . DIRECTORY_SEPARATOR . $className . '.php';
+
 
         if (file_put_contents($filePath, $classContent)) {
             $this->info("Le fichier $filePath a été créé avec succès.");
