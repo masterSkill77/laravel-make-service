@@ -31,8 +31,9 @@ class MakeService extends Command
         $segments = explode('/', $filename);
         $className = end($segments);
         $namespace = count($segments) > 1 ? implode('\\', array_slice($segments, 0, -1)) : 'App\Services';
+        $folder = count($segments) > 1 ? implode('\\', array_slice($segments, 0, -1)) : DIRECTORY_SEPARATOR;
 
-        $directoryPath = app_path('Services') . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $namespace);
+        $directoryPath = app_path('Services') . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $folder);
 
         // Créez le répertoire si nécessaire
         if (!is_dir($directoryPath)) {
@@ -53,26 +54,17 @@ class MakeService extends Command
                 {
                     // Constructeur de la classe
                 }
-
-                public function maMethode()
-                {
-                    // Méthode de la classe
-                }
             }
             PHP;
 
         $classContent = str_replace('{{Namespace}}', $namespace, $classContent);
         $classContent = str_replace('{{ClassName}}', $className, $classContent);
 
-        // Générez le chemin complet du fichier en utilisant le namespace et le nom de classe
-        // Générez le chemin complet du fichier en utilisant le namespace et le nom de classe
-        $filePath = $directoryPath . DIRECTORY_SEPARATOR . $className . '.php';
-
-
         if (file_put_contents($filePath, $classContent)) {
-            $this->info("Le fichier $filePath a été créé avec succès.");
+            $this->info("Le service $filePath a été créé avec succès.");
+            $this->success("Enjoy your development :)");
         } else {
-            $this->error("Une erreur est survenue lors de la création du fichier.");
+            $this->error("Une erreur est survenue lors de la création du service.");
         }
     }
 }
