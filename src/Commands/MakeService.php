@@ -62,7 +62,7 @@ class MakeService extends Command
 
         if (file_put_contents($filePath, $classContent)) {
             $this->info("Le service $filePath a été créé avec succès.");
-            $this->success("Enjoy your development :)");
+            $this->info("Enjoy your development :)");
         } else {
             $this->error("Une erreur est survenue lors de la création du service.");
         }
