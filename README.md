@@ -1,22 +1,36 @@
-# Le projet
+## The Project
 
-C'est un projet qui crée un package Laravel pour créer automatique un fichier de Service dans app\Services et avec la namespace par defaut `App\Services`
+This is a project that creates a Laravel package for automatically generating a Service file in `app\Services` with the default namespace `App\Services`.
 
-# Prérequis
+## Prerequisites
 
-- Laravel framework : ">=9.0",
-- php : ">=8.0"
+- Laravel framework: ">=9.0"
+- PHP: ">=8.0"
 
-# Création de service
+## Installation
 
-`php artisan make:service MyService`
+To install the package, run the following command:
 
-# L'auteur
+```shell
+composer require masterskill/service-package
+```
 
-Clairmont RAJAONARISON - masterSkill77
-<clairmont.rajaonarison@gmail.com>
-<clairmont@saha-technology.com>
+## Creating a Service
 
-# Note
+To create a new service, use the following Artisan command:
+
+```shell
+php artisan make:service MyService
+```
+
+## Author
+
+-Name : Clairmont RAJAONARISON - masterSkill77
+-Email: clairmont.rajaonarison@gmail.com
+-Email: clairmont@saha-technology.com
+
+## Note
+
+- Namespace is based on App\
 
 Enjoy it :)
