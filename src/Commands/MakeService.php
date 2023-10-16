@@ -18,7 +18,7 @@ class MakeService extends Command
      *
      * @var string
      */
-    protected $description = 'Cette commande crée automatiquement un service Laravel dans le dossier app\Services';
+    protected $description = 'Make a new service';
 
     /**
      * Execute the console command.
@@ -27,23 +27,26 @@ class MakeService extends Command
     {
         $filename = $this->argument('name');
 
-        // Séparez le nom de classe et le chemin du namespace s'ils sont fournis dans le format "Namespace/NomDeClasse"
+        $directory = config('service-package.service_directory');
+        $defaultNamespace = config('service-package.namespace');
+
+        // Separate the class name and namespace path if provided in the format "Namespace/ClassName."
         $segments = explode('/', $filename);
         $className = end($segments);
-        $namespace = count($segments) > 1 ? implode('\\', array_slice($segments, 0, -1)) : 'App\Services';
+        $namespace = count($segments) > 1 ? implode('\\', array_slice($segments, 0, -1)) : $defaultNamespace;
         $folder = count($segments) > 1 ? implode('\\', array_slice($segments, 0, -1)) : DIRECTORY_SEPARATOR;
 
         $directoryPath = app_path('Services') . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $folder);
 
-        // Créez le répertoire si nécessaire
+        // Create the directory if necessary.
         if (!is_dir($directoryPath)) {
             mkdir($directoryPath, 0755, true);
         }
-        if (!str_starts_with($namespace, 'App\Services')) {
-            $namespace = 'App\Services\\' . $namespace;
+        if (!str_starts_with($namespace, $defaultNamespace)) {
+            $namespace = $defaultNamespace . '\\' . $namespace;
         }
 
-        // Générez le chemin complet du fichier en utilisant le namespace et le nom de classe
+        // Generate the complete file path using the namespace and class name.
         $filePath = $directoryPath . DIRECTORY_SEPARATOR . $className . '.php';
 
         $classContent = <<<'PHP'
@@ -55,7 +58,7 @@ class MakeService extends Command
             {
                 public function __construct()
                 {
-                    // Constructeur de la classe
+                    // Constructor of the class
                 }
             }
             PHP;
@@ -63,8 +66,8 @@ class MakeService extends Command
         $classContent = str_replace('{{Namespace}}', $namespace, $classContent);
         $classContent = str_replace('{{ClassName}}', $className, $classContent);
 
-        if (file_put_contents($filePath, $classContent)) {
-            $this->info("Le service $filePath a été créé avec succès.");
+        if (file_put_contents($className, $classContent)) {
+            $this->info("The service $filePath has been created successfully.");
             $this->info("Enjoy your development :)");
         } else {
             $this->error("Une erreur est survenue lors de la création du service.");

@@ -9,6 +9,9 @@ class MakeServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        $this->publishes([
+            __DIR__ . '/../config/service-package.php' => config_path('service-package.php'),
+        ], 'config');
     }
 
     public function register()
