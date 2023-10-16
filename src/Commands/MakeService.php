@@ -36,14 +36,14 @@ class MakeService extends Command
         $namespace = count($segments) > 1 ? implode('\\', array_slice($segments, 0, -1)) : $defaultNamespace;
         $folder = count($segments) > 1 ? implode('\\', array_slice($segments, 0, -1)) : DIRECTORY_SEPARATOR;
 
-        $directoryPath = app_path('Services') . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $folder);
+        $directoryPath = $directory . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $folder);
 
         // Create the directory if necessary.
         if (!is_dir($directoryPath)) {
             mkdir($directoryPath, 0755, true);
         }
         if (!str_starts_with($namespace, $defaultNamespace)) {
-            $namespace = $defaultNamespace . '\\' . $namespace;
+            $namespace = $defaultNamespace . $namespace;
         }
 
         // Generate the complete file path using the namespace and class name.
