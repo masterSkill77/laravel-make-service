@@ -15,6 +15,16 @@ To install the package, run the following command:
 composer require masterskill/service-package
 ```
 
+## Publish the config file
+
+To publish the config file, run the command:
+
+```shell
+php artisan vendor:publish --tag=config
+```
+
+The config file will be registered as 'service-package.php' under config folder.
+
 ## Creating a Service
 
 To create a new service, use the following Artisan command:
