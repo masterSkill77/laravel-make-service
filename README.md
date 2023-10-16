@@ -25,9 +25,9 @@ php artisan make:service MyService
 
 ## Author
 
--Name : Clairmont RAJAONARISON - masterSkill77
--Email: clairmont.rajaonarison@gmail.com
--Email: clairmont@saha-technology.com
+- Name : Clairmont RAJAONARISON - masterSkill77
+- Email: clairmont.rajaonarison@gmail.com
+- Email: clairmont@saha-technology.com
 
 ## Note
 
