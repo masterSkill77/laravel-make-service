@@ -1,6 +1,6 @@
 {
 	"name": "masterskill/service-package",
-	"description": "C'est un package qui permet d'automatiquement créer des services dans Laravel",
+	"description": "This is a package that allows you to automatically create services in Laravel.",
 	"version": "1.0.0",
 	"type": "library",
 	"require": {
