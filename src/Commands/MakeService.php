@@ -12,7 +12,7 @@ class MakeService extends Command
      *
      * @var string
      */
-    protected $signature = 'make:service {name : Le nom de la classe et le chemin du namespace}';
+    protected $signature = 'make:service {name : Class name and its subfolder if needed}';
 
     /**
      * The console command description.
