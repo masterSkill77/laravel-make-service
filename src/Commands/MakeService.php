@@ -36,7 +36,7 @@ class MakeService extends Command
         $namespace = count($segments) > 1 ? implode('\\', array_slice($segments, 0, -1)) : $defaultNamespace;
         $folder = count($segments) > 1 ? implode('\\', array_slice($segments, 0, -1)) : DIRECTORY_SEPARATOR;
 
-        $directoryPath = $directory . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $folder);
+        $directoryPath = $directory . str_replace('\\', DIRECTORY_SEPARATOR, $folder);
 
         // Create the directory if necessary.
         if (!is_dir($directoryPath)) {
