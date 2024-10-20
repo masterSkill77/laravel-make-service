@@ -16,4 +16,9 @@ trait HasRest
             throw $e;
         }
     }
+
+    public function get(mixed $value, string $column = 'id')
+    {
+        return ($this->model)::where($column, $value)->first();
+    }
 }
